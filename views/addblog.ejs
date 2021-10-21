@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.ckeditor.com/ckeditor5/29.2.0/classic/ckeditor.js"></script> <!-- การดึงเอา ckeditor มาใช้ -->
+
+
+</head>
+<body>
+    <%- include nav %>
+    <div class="container">
+        <h2 align="center">เขียนบทความ</h2>
+        <% if(locals.errors) { %>
+        <ul class="alert alert-dang" >
+            <% Object.values(errors).forEach(function(error){ %> <!-- ดึงข้อมูลจากตัวแปล errors แล้วก็ loop ข้อมูลโดย foteach -->
+                <li><%= error.msg %></li>
+            <% }) %>
+        </ul>
+        <% } %>
+        <form class="" action="/blog/add" method="post" >
+            <div class="form-group"> 
+                <label for="">ชื่อบทความ</label>
+                <input type="text" name="name" value="" class="form-control">
+            </div>
+            <div class="form-group"> 
+                <label for="">รายละเอียด</label>
+                <textarea name="description" row="8" cols="80" class="form-control" id="description"> </textarea>
+            </div>
+            <div class="form-group"> 
+                <label for="">ผู้แต่ง</label>
+                <input type="text" name="author" value="" class="form-control">
+            </div>
+            <input type="submit" name="" value="บันถึง" class="btn btn-primary">
+        </form>
+    </div>
+    <script>
+        // การดึงเอาลูกเล่นในการเขียนบทความมาใช้
+        ClassicEditor 
+            .create( document.querySelector( '#description' ) )
+            .catch( error => {
+                console.error( error );
+            } );
+    </script>
+</body>
+</html>
